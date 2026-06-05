@@ -978,14 +978,6 @@ p {
   font-weight: 750;
 }
 
-.copy-status {
-  color: rgba(248, 251, 251, 0.72);
-  font-size: 0.92rem;
-  grid-column: 1 / -1;
-  margin: 0;
-  min-height: 1.4em;
-}
-
 .site-footer {
   background: #111827;
   color: rgba(248, 251, 251, 0.72);

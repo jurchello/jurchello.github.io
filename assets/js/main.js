@@ -48,18 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const copied = await copyText(email);
-      const message = copied ? "Email copied" : "Copy failed";
       const buttonMessage = copied ? "Email copied" : "Copy email";
-      const feedbackScope = button.closest(".contact-panel");
-      const status = feedbackScope ? feedbackScope.querySelector(".copy-status") : null;
-
-      if (status) {
-        status.textContent = message;
-        window.clearTimeout(status.copyResetTimer);
-        status.copyResetTimer = window.setTimeout(() => {
-          status.textContent = "";
-        }, 1800);
-      }
 
       if (label) {
         label.textContent = buttonMessage;
