@@ -21,6 +21,7 @@
 }
 
 html {
+  min-width: 320px;
   scroll-behavior: smooth;
 }
 
@@ -30,7 +31,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
   line-height: 1.6;
-  overflow-x: hidden;
+  min-width: 320px;
 }
 
 a {
@@ -60,6 +61,10 @@ h3 {
 
 h1 {
   font-size: clamp(2.35rem, 2rem + 2vw, 4rem);
+}
+
+h1 span {
+  display: block;
 }
 
 h2 {
@@ -343,6 +348,7 @@ p {
 
 .hero-copy {
   max-width: 790px;
+  min-width: 0;
 }
 
 .hero-lead {
@@ -462,14 +468,9 @@ p {
 
 .project-chips {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
-  overflow-x: auto;
   padding-bottom: 2px;
-  scrollbar-width: none;
-}
-
-.project-chips::-webkit-scrollbar {
-  display: none;
 }
 
 .project-chips a {
@@ -480,7 +481,6 @@ p {
   border-radius: 0;
   color: var(--color-dark);
   display: inline-flex;
-  flex: 0 0 auto;
   font-size: 0.88rem;
   font-weight: 800;
   gap: 6px;
@@ -1077,8 +1077,7 @@ p {
   }
 
   .nav-cta {
-    margin-top: 10px;
-    width: 100%;
+    display: none;
   }
 
   .brand-role {
@@ -1096,7 +1095,25 @@ p {
 
   .hero-profile {
     justify-self: center;
-    max-width: 240px;
+    max-width: 560px;
+  }
+
+  .hero-portrait {
+    align-items: center;
+    grid-template-columns: minmax(170px, 220px) minmax(0, 1fr);
+  }
+
+  .hero-portrait figcaption {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 22px;
+  }
+
+  .hero-portrait figcaption p {
+    font-size: 1rem;
+    line-height: 1.62;
   }
 
   .metric-grid {
@@ -1125,7 +1142,17 @@ p {
     padding-top: 72px;
   }
 
+  .hero-profile {
+    max-width: 240px;
+  }
+
+  .hero-portrait {
+    grid-template-columns: 1fr;
+  }
+
   .hero-portrait figcaption {
+    align-self: auto;
+    display: block;
     padding: 13px;
   }
 
@@ -1135,6 +1162,19 @@ p {
 
   .hero-actions .btn {
     width: 100%;
+  }
+
+  .project-chips {
+    gap: 2px 6px;
+  }
+
+  .project-chips a {
+    font-size: 0.82rem;
+    padding: 0.34rem 0.5rem 0.44rem;
+  }
+
+  .project-chips a span {
+    font-size: 0.68rem;
   }
 
   .project-block {
@@ -1154,16 +1194,51 @@ p {
     padding: 6px;
   }
 
+  .screenshot-zoom img {
+    transform: none;
+  }
+
   .proof-band {
     padding: 58px 0;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575.98px) {
   h1 {
-    font-size: 2.12rem;
+    font-size: 1.62rem;
+    line-height: 1.1;
   }
 
+  .hero-lead {
+    font-size: 1rem;
+  }
+
+  .hero-panel-heading {
+    font-size: 0.72rem;
+  }
+
+  .hero-portrait figcaption p {
+    font-size: 0.76rem;
+    line-height: 1.38;
+  }
+
+  .badge-list li {
+    font-size: 0.82rem;
+    padding: 0.38rem 0.58rem;
+  }
+
+  .project-chips {
+    align-items: flex-start;
+  }
+
+  .project-chips a {
+    gap: 4px;
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
   .brand-mark {
     flex-basis: 38px;
     height: 38px;

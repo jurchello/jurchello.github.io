@@ -3,31 +3,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggler = document.querySelector(".navbar-toggler");
   const navLinks = document.querySelectorAll(".navbar-nav .nav-link, .project-chips a");
   const copyButtons = document.querySelectorAll("[data-copy-email]");
-  const copyStatuses = document.querySelectorAll(".copy-status");
 
-  if (navToggler && navCollapse) {
-    navToggler.addEventListener("click", () => {
-      const isOpen = navCollapse.classList.toggle("show");
-      navToggler.setAttribute("aria-expanded", String(isOpen));
-    });
-  }
+  const closeNavMenu = () => {
+    if (!navCollapse || !navCollapse.classList.contains("show")) {
+      return;
+    }
+
+    if (window.bootstrap && bootstrap.Collapse) {
+      bootstrap.Collapse.getOrCreateInstance(navCollapse).hide();
+    } else {
+      navCollapse.classList.remove("show");
+    }
+
+    if (navToggler) {
+      navToggler.setAttribute("aria-expanded", "false");
+    }
+  };
 
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      if (!navCollapse || !navCollapse.classList.contains("show")) {
-        return;
-      }
-
-      if (window.bootstrap && bootstrap.Collapse) {
-        bootstrap.Collapse.getOrCreateInstance(navCollapse).hide();
-      } else {
-        navCollapse.classList.remove("show");
-      }
-
-      if (navToggler) {
-        navToggler.setAttribute("aria-expanded", "false");
-      }
+      closeNavMenu();
     });
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (
+      !navCollapse ||
+      !navCollapse.classList.contains("show") ||
+      event.target.closest("#siteNavbar")
+    ) {
+      return;
+    }
+
+    closeNavMenu();
   });
 
   copyButtons.forEach((button) => {
@@ -40,12 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const copied = await copyText(email);
-      const message = copied ? `Email copied: ${email}` : `Email: ${email}`;
+      const message = copied ? "Email copied" : "Copy failed";
       const buttonMessage = copied ? "Email copied" : "Copy email";
+      const feedbackScope = button.closest(".contact-panel");
+      const status = feedbackScope ? feedbackScope.querySelector(".copy-status") : null;
 
-      copyStatuses.forEach((status) => {
+      if (status) {
         status.textContent = message;
-      });
+        window.clearTimeout(status.copyResetTimer);
+        status.copyResetTimer = window.setTimeout(() => {
+          status.textContent = "";
+        }, 1800);
+      }
 
       if (label) {
         label.textContent = buttonMessage;
