@@ -1134,24 +1134,6 @@ p {
     padding-top: 72px;
   }
 
-  .hero-profile {
-    max-width: 240px;
-  }
-
-  .hero-portrait {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-portrait figcaption {
-    align-self: auto;
-    display: block;
-    padding: 13px;
-  }
-
-  .hero-portrait figcaption p {
-    font-size: 0.88rem;
-  }
-
   .hero-actions .btn {
     width: 100%;
   }
@@ -1203,6 +1185,20 @@ p {
 
   .hero-lead {
     font-size: 1rem;
+  }
+
+  .hero-profile {
+    max-width: 240px;
+  }
+
+  .hero-portrait {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-portrait figcaption {
+    align-self: auto;
+    display: block;
+    padding: 13px;
   }
 
   .hero-panel-heading {
